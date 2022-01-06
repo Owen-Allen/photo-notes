@@ -11,7 +11,6 @@ REL_PATH = ""
 
 def determine_path():
     ### DETERMINE THE TO_PATH TO MOVE THE IMAGES TO
-
     global TO_PATH
     global REL_PATH
 
@@ -33,7 +32,7 @@ def determine_path():
 
 async def monitor_input():
     while True:
-        q = await aioconsole.ainput("Type 'q' or 'quit' to exit \n")
+        q = await aioconsole.ainput("Type 'q' or 'quit' and enter to exit \n")
         if q == "q" or q == "quit":
             exit()
 
