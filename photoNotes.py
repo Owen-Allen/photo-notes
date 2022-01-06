@@ -1,6 +1,6 @@
+#!/usr/bin/env python3
 import sys
-import os # determine where the script is being called from
-import time
+import os
 import shutil
 import asyncio
 import aioconsole
@@ -31,16 +31,11 @@ def determine_path():
 
     print("USING PATH " + TO_PATH)
 
-
-
 async def monitor_input():
     while True:
         q = await aioconsole.ainput("Type 'q' or 'quit' to exit \n")
-        print("This is q " + q)
         if q == "q" or q == "quit":
-            print("IN IF")
             exit()
-
 
 async def monitor_screenshot(set_files):
     while(True):
@@ -50,7 +45,6 @@ async def monitor_screenshot(set_files):
             if filename not in set_files:
                 move_file(filename)
 
-
 def move_file(filename):
     # move the file from SCREENSHOTS_PATH to TO_PATH
     from_file_path = SCREENSHOTS_PATH + "/" + filename
@@ -58,7 +52,7 @@ def move_file(filename):
     
     if(os.path.exists(from_file_path)): # just in case
         shutil.move(from_file_path, to_file_path)
-        print("MARKDOWN INSERT: ![](" + REL_PATH + "/" + filename + ")")
+        print("MARKDOWN INSERT: ![](" + REL_PATH + "/" + filename.replace(" ", "%20") + ")")
     else:
         print("Error when trying to move " + filename)
 
@@ -71,7 +65,6 @@ def main():
                                                             monitor_input(), 
                                                             monitor_screenshot(set_files)
                                                             ]))
-
 
 if __name__ == "__main__":
     main()
