@@ -1,4 +1,4 @@
-# Photo Notes
+# photo-notes
 
 ### What is it?
 
