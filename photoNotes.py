@@ -5,40 +5,43 @@ import shutil
 import asyncio
 import aioconsole
 
-SCREENSHOTS_PATH = "/Users/owenallen/Desktop/screenshots"
-TO_PATH = ""
-REL_PATH = ""
+SCREENSHOTS_PATH = "/Users/owenallen/Desktop/screenshots" # CHANGE THIS TO YOUR SCREENSHOTS PATH
+# Windows default: "/Users/<username>/Pictures/Screenshots"
+# Mac default: "/Users/<username>/Desktop"
+
+TO_PATH = ""  # Full path where you want to move the files
+REL_PATH = "" # Relative path to where you want to move the files (used for insertion links)
 
 def determine_path():
     ### DETERMINE THE TO_PATH TO MOVE THE IMAGES TO
     global TO_PATH
     global REL_PATH
 
-    # CASE 1: "." or "", for if the user wants them in the current directory
-    if(len(sys.argv) == 1 or sys.argv[1] == "."): 
-        # MOVE TO CWD
-        TO_PATH = os.getcwd()
+    path = ""
 
-    # CASE 2: User inputs a relative path
+    if(len(sys.argv) == 1): # if no path given in command line arg, assume "."
+        path = "."
     else:
-        REL_PATH = os.path.relpath(sys.argv[1], start = os.getcwd())
-        TO_PATH = os.getcwd() + "/" + REL_PATH
+        path = sys.argv[1]
 
-        if(not os.path.exists(TO_PATH)):
-            print("ERROR: THE PATH YOU ENTERED DOES NOT EXIST")
-            exit()
+    REL_PATH = os.path.relpath(path, start = os.getcwd())
+    TO_PATH = os.getcwd() + "/" + REL_PATH
 
-    print("USING PATH " + TO_PATH)
+    if(not os.path.exists(TO_PATH)):
+        print("ERROR: THE PATH YOU ENTERED DOES NOT EXIST")
+        quit()
+
+    print(f"USING PATH {TO_PATH}")
 
 async def monitor_input():
     while True:
         q = await aioconsole.ainput("Type 'q' or 'quit' and enter to exit \n")
         if q == "q" or q == "quit":
-            exit()
+            quit()
 
 async def monitor_screenshot(set_files):
     while(True):
-        await asyncio.sleep(2)
+        await asyncio.sleep(1)
         ls_screenshots = os.listdir(SCREENSHOTS_PATH)
         for filename in ls_screenshots: 
             if filename not in set_files:
@@ -51,7 +54,8 @@ def move_file(filename):
     
     if(os.path.exists(from_file_path)): # just in case
         shutil.move(from_file_path, to_file_path)
-        print("MARKDOWN INSERT: ![](" + REL_PATH + "/" + filename.replace(" ", "%20") + ")")
+        print("MARKDOWN INSERT:")
+        print("![](" + REL_PATH.replace(" ", "%20") + "/" + filename.replace(" ", "%20") + ")")
     else:
         print("Error when trying to move " + filename)
 
