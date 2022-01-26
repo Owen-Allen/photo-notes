@@ -1,12 +1,12 @@
 # photo-notes
 
-### What is it?
+## What is it?
 
-Photo Notes is a tool meant to help students take notes in the online environment, but can also be used for convenience.  When taking notes, it often helps to have the professors images and diagrams nested inside of your notes.  When using markdown, this can be inconvenient to do in class.  Using photoNotes, you can take a screenshot of your lecture as its playing and move it to whichever images directory you'd like to use for your class.  PhotoNotes also creates a markdown insertion link so that you can view the image within your notes.
+photo-notes is a tool meant to help students take notes in the online environment.  As a student, it is useful to include the images and diagrams from your lectures inside of your notes.  When taking notes in Markdown, it can be inconvenient to transfer the files and create the insertion link manually during class.  photo-notes does this work for you, so that all you need to do is take a screenshot and paste the automatically created insertion link into your notes.
 
-### How does it work?
+## How does it work?
 
-The tool works by monitoring new input in whatever directory your screenshots are automatically sent to.  When a new file is added to that directory when the program is running, it moves that file to whichever folder the user specifies at start time.
+The tool works by monitoring new input in whatever directory your screenshots are automatically sent to.  When a new file is added to that directory, it moves that file to whichever folder the user specifies at start time.
 
 
 ## SETUP
@@ -17,7 +17,7 @@ The tool works by monitoring new input in whatever directory your screenshots ar
 
 3. Install aioconsole by running 'pip install aioconsole==0.3.3'.  To check if you already have it, type 'pip show aioconsole'
 
-4. Move photoNotes.py to a binaries folder available in your PATH.  I used '/usr/local/bin'.  You can also remove the .py extension.
+4. Move photoNotes.py to a binaries folder available in your PATH.  I used '/usr/local/bin'.  If you like, you can also remove the .py extension.
 
 
 ## DEMO
